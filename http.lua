@@ -399,16 +399,16 @@ function _M.set_keepalive( self, timeout, size )
 end
 
 function _M.set_timeout( self, time )
-    local rst, err_msg = self.sock:settimeout(time)
-    if err_msg ~= nil then
-        return 'SocketError', 'set timeout:' .. err_msg
-    end
-
-    return nil, nil
+     self.sock:settimeout(time)
 end
 
 function _M.close( self )
-    self.sock:close()
+    local rst, err_msg = self.sock:close(time)
+    if err_msg ~= nil then
+        return 'SocketError', 'close:' .. err_msg
+    end
+
+    return nil, nil
 end
 
 return _M
